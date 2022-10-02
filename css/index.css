@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow: hidden;
+}
+
+.upper-panel{
+    height: 60vh;
+    border: 5px groove white;
+    border-right: none;
+    border-top: none;
+}
+
+.bottom-panel{
+    border: 5px groove white;
+    border-top: none;
+    border-right: none;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-panel{
+    border-bottom: none;
+    margin: auto;
+}
+
+.bottom-panel{
+    height: 40vh;
+    border-top: none;
+}
+
+.information{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.control{
+    width: 80%;
+    position: bottom;
+}
+
