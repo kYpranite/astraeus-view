@@ -30,9 +30,9 @@ class Star:
         outputFlux = []
 
         for time in self.time:
-            outputTime.append(str(time.mjd - 54832.5))
+            outputTime.append(float(time.mjd - 54832.5))
         for flux in self.flux:
-            outputFlux.append(str(flux.value))
+            outputFlux.append(float(flux.value))
 
         output = {
             "kic": self.kic,

@@ -16,16 +16,15 @@
 }
 
 .stars {
-  /* fallback */
   background-repeat: repeat;
   background-position: center;
   background-color: #01050a;
-  background-image: url(../stars.png);
+  background-image: url(../assets/images/stars.png);
   z-index:-2;
 }
 
 .twinkling{
-  background:transparent url(../twinkling.png) repeat top center;
+  background:transparent url(../assets/images/twinkling.png) repeat top center;
   z-index:-1;
   animation:move-twink-back 400s linear infinite;
 }
