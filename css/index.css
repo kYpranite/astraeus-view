@@ -3,8 +3,20 @@
     padding: 0;
 }
 
+h1{
+    font-weight: 700;
+}
+
+h3{
+    font-size: 2em;
+    font-weight: 700;
+}
+
+
 body{
     overflow: hidden;
+    font-family: 'Inter Tight', sans-serif;
+    color:white;
 }
 
 .wrapper{
@@ -16,10 +28,43 @@ body{
     height: 100vh;
     width: 20%;
     border-right: 3px solid white;
+    padding-top: 2%;
+}
+
+.title{
+    margin-left:5%;
+    margin-bottom: 15%;
+}
+
+
+.current-view{
+    text-align: center;
+    margin-bottom:20%;
+}
+
+.selection{
+    height: 50vh;
+    border: 3px solid white;
+    border-radius: 25px;
+    margin: 0 10% 0 10%;
     padding-top: 5%;
+    text-align: center;;
+}
+
+.search-icon{
+    font-family: Arial, FontAwesome;
+}
+
+.current-star{
+    font-size: 1.7em;
 }
 
 .searchbar{
-    width: 75%;
-    margin:auto;
+    width: 85%;
+    margin: auto;
+    border-radius: 25px;
+}
+
+.samples-header{
+    margin-top: 10%;
 }
