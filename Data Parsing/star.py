@@ -1,3 +1,6 @@
+import json
+
+
 class Star:
     def __init__(self, kic, time, flux, lc, variability="", name=""):
         self.name = name
@@ -21,3 +24,21 @@ class Star:
         print(self.flux)
         print(self.variability)
         print(self.name)
+
+    def outputJson(self):
+        outputTime = []
+        outputFlux = []
+
+        for time in self.time:
+            outputTime.append(str(time.mjd - 54832.5))
+        for flux in self.flux:
+            outputFlux.append(str(flux.value))
+
+        output = {
+            "kic": self.kic,
+            "time": outputTime,
+            "flux": outputFlux,
+            "name": self.name,
+            "variability": self.variability
+        }
+        return json.dumps(output)

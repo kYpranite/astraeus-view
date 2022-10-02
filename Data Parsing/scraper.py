@@ -1,10 +1,6 @@
 from lightkurve import search_targetpixelfile
 import matplotlib.pyplot as plt
 import star
-import json
-
-stars = []
-
 
 # KIC 7198959 (RR Lyr) -Ceph
 # KIC 7548061  (V1154 Cyg) -Ceph
@@ -20,24 +16,6 @@ def genStar(kic, name="", variability=""):
 
     return outputStar
 
-
-def outputJson(starObj):
-    outputTime = []
-    outputFlux = []
-
-    for time in starObj.time:
-        outputTime.append(str(time.mjd-54832.5))
-    for flux in starObj.flux:
-        outputFlux.append(str(flux.value))
-
-    output = {
-        "kic": starObj.kic,
-        "time": outputTime,
-        "flux": outputFlux,
-        "name": starObj.name,
-        "variability": starObj.variability
-    }
-    return json.dumps(output)
 
 
 # stars.append(genStar("KIC 8462852", "Boyajian's Star"))
