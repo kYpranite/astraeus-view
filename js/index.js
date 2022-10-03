@@ -154,6 +154,7 @@ function getJson(name)
             myChart = new Chart(ctx1, {
                 type: 'scatter',
                 data: data,
+                color: "rgba(255,255,255,1)",
                 options: {
                 scales: {
                     x: {
