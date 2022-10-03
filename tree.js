@@ -1,3 +1,6 @@
+var cepheid = false
+var binary = false
+
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(
@@ -30,7 +33,6 @@ var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.Mes
     }
 ));
 planet.position.x = -7
-scene.add(planet);
 
 
 const sunBaseColor = textureLoader.load('./maps/2k_sun.jpg');
@@ -63,20 +65,23 @@ var render = function() {
     );
 }
 render();
+
 var time1;
 var flux1
 fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json())
 .then((json) => 
     {
-        var KIC8462852 = normalize(json.time, json.flux)
+        
         time1 = json.time
         flux1 = json.flux
-        console.log(json)
+
+        setupEclipseBinary(time1, flux1)
+        setupCepheid(time1, flux1)
         
         console.log(combine(time1, flux1))
         const data = {
             datasets: [{
-                label: 'Scatter Dataset',
+                label: 'Light Curve',
                 data: combine(time1, flux1),
                 backgroundColor: 'rgb(255, 99, 132)'
             }],
@@ -98,38 +103,39 @@ fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json
             }
     );
 
-function normalize(time, flux)
+function setupEclipseBinary(time, flux)
 {
-    //console.log(indexOfOutlier(flux))
-
-    // let low = time[0]
-    // let multiple = (2 * Math.PI) / (time[time.length - 1] - time[0])
-    // for(let i = 0; i < time.length; i++)
-    // {
-    //     time[i] -= low
-    //     time[i] *= multiple
-    //     console.log(time[i]);
-    // }
-}
-
-function indexOfOutlier(array)
-{
-    console.log(array)
-    var total = 0;
-    array.forEach(element => {
-        
-        total += element
-    })
-    var mean = total / array.length
-    console.log(total / array.length)
+    binary = true
+    cepheid = false
+    scene.add(planet);
     
-    for(var i = 0; i < array.length; i++)
-    {
-        if (array[i] < mean * .9)
-            return i;
-    }
+    var min = Math.min(...flux)
+    console.log(min)
+    var minIndex = flux.indexOf(min)
+    
+    var low = time[minIndex]
+
+    console.log("binary min max" + minIndex)
 
 }
+
+function setupCepheid(time, flux)
+{
+    cepheid = true
+    binary = false
+    var min = Math.min(...flux)
+    var max = Math.max(...flux)
+    var max2 = Math.max(...(flux.slice( minIndex)))
+
+    var minIndex = flux.indexOf(min)
+    var maxIndex = flux.indexOf(max)
+    var maxIndex2 = flux.indexOf(max2)
+    console.log("cepheid min " + time[minIndex] + "|" + time[maxIndex] + "|" + time[maxIndex2])
+}
+
+
+
+
 
 function combine(time, flux)
 {
