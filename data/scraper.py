@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import star
 
 stars = []
-# KIC 7198959 (RR Lyr) -Ceph
 # KIC 7548061  (V1154 Cyg) -Ceph
 # KIC 01026957 - Eclipse
 # KIC 01433962 - Eclipse

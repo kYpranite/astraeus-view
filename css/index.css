@@ -67,4 +67,17 @@ body{
 
 .samples-header{
     margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.sample-star-button{
+    width: 50%;
+    margin-bottom: 5%;
+}
+
+.interesting-stars{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
 }

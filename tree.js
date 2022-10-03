@@ -1,3 +1,17 @@
+const coolbutton = $(".cool-button");
+var slider = document.getElementById("myRange");
+
+coolbutton.click(function(){
+    console.log("HI");
+})
+
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  console.log(this.value);
+}
+
+
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(
