@@ -231,6 +231,7 @@ body{
 }
 
 .learn-more-popup{
+    display: none;
     padding: 2%;
     color:white;
     background-color:#1b1e23;

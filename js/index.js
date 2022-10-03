@@ -15,10 +15,6 @@ const container = document.getElementById( 'canvas' );
 
 console.log(container);
 
-$( window ).on('load', function() {
-    console.log($(".learn-more-popup"))
-    $(".learn-more-popup").hide();
- });
 
 kic846.click(function(){
     getJson('KIC 8462852', true)
