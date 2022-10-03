@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8b73df04b4.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/stars.css">
 </head>
@@ -17,15 +20,33 @@
     </div>
     <div class="wrapper">
         <div class="control">
-            <input type="text" placeholder="&#xF002; Search KIC Number" class="form-control searchbar" aria-label="KIC Number">
-            
+            <h1 class="title">Astreaus View</h1>
+            <div class="current-view">
+                <h3 class="current-star-label">Currently Viewing:</h2>
+                <h4 class="current-star">KIC 1231234123</h4>
+            </div>
+            <div class="selection">
+                <div class="input-group searchbar">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text search-icon" id="basic-addon1">&#xF002;</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Enter KIC Number" aria-label="Enter KIC Number" aria-describedby="basic-addon1">
+                </div>
+                <div class="interesting-stars">
+                    <h3 class="samples-header">Interesting Stars</h3>
+                    <button class="btn btn-outline-light sample-star-button" type="button">KIC 8462852</button>
+                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
+                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
+                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
+                </div>
+
+            </div>
         </div>
         <div class="main-container">
             <div class="display">
                 
             </div>
             <div class="time">
-
             </div>
         </div>
     </div>
