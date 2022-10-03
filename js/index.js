@@ -66,17 +66,16 @@ window.addEventListener('resize', ()=> {
     camera.updateProjectionMatrix();
 })
 
-const marsBaseColor = textureLoader.load("./maps/2k_mars.jpg");
+const marsBaseColor = textureLoader.load("../maps/2k_mars.jpg");
 
 var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.MeshStandardMaterial(
     {
         map: marsBaseColor
     }
 ));
-planet.position.x = -7
 
 
-const sunBaseColor = textureLoader.load('./maps/2k_sun.jpg');
+const sunBaseColor = textureLoader.load('../maps/2k_sun.jpg');
 var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshStandardMaterial(
     {
         map: sunBaseColor,
@@ -123,7 +122,7 @@ render();
 
 var time1;
 var flux1
-fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json())
+fetch('../assets/sample-stars/KIC 8462852.json').then((response) => response.json())
 .then((json) => 
     {
         

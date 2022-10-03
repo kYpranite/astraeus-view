@@ -72,7 +72,6 @@ var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.Mes
         map: marsBaseColor
     }
 ));
-planet.position.x = -7
 
 
 const sunBaseColor = textureLoader.load('./maps/2k_sun.jpg');
