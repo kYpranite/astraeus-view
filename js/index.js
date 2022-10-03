@@ -3,6 +3,7 @@ var binary = true
 const coolbutton = $(".cool-button");
 var slider = document.getElementById("time-slider");
 
+
 var curArray;
 coolbutton.click(function(){
     if(cepheid)
