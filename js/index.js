@@ -8,14 +8,17 @@ var kic010 = $("#kic010");
 var kic754 = $("#kic754");
 var kic014 = $("#kic014");
 var kic373 = $("#kic373");
-
 var currStarLabel = document.querySelector('.current-star');
 var time = $("#current-time");
-console.log(time)
 
 const container = document.getElementById( 'canvas' );
 
 console.log(container);
+
+$( window ).on('load', function() {
+    console.log($(".learn-more-popup"))
+    $(".learn-more-popup").hide();
+ });
 
 kic846.click(function(){
     getJson('KIC 8462852', true)
@@ -31,6 +34,31 @@ kic014.click(function(){
 })
 kic373.click(function(){
     getJson('KIC 3733346', false)
+})
+
+var starTitle = $(".star-title");
+var starInfo = $(".star-info");
+
+$(".learn-label").click(function(){
+    if($(this).attr('id') == "754id"){
+        starTitle[0].textContent = "V1154 Cyg";
+        starInfo[0].innerHTML = "Cepheids are variable stars that brighten and dim regularly (period = 2- 60 days). It was also noted by Harvard astronomer Henrietta Swan Leavitt that their period is a uniform function of their luminosity (average luminosity = 300 to 40000 L). This relationship is important because it allows us to calculate a star’s distance away from Earth from the comparison of its apparent brightness versus its calculated brightness. Thus, cepheids are used as a ruler to measure the distance to its galaxy.  (Learn more on <a href='https://starchild.gsfc.nasa.gov/docs/StarChild/questions/cepheids.html'>Cepheids (nasa.gov)</a>)"
+    }else if($(this).attr('id') == "010id"){
+        starTitle[0].textContent = "Kepler-11731";
+        starInfo[0].innerHTML = "An eclipsing binary consists of two bodies moving close in orbit. Due to their position in relation to Earth, their combined light curve can dip every time each star is in front of the other. The shape of this light curve can be used to calculate the ratio of size of the two stars and the ratio of luminosity. (Learn more on  <a href='https://www.britannica.com/science/star-astronomy/Eclipsing-binaries'> star - Eclipsing binaries | Britannica </a>)"
+    }else if($(this).attr('id') == "846id"){
+        starTitle[0].textContent = "Tabby's Star";
+        starInfo[0].innerHTML = "Unusual fluctuations in this star’s brightness were identified by citizen scientists as part of Project Hunters. Various hypotheses including an alien megastructure have been created to explain this anomaly, although recent discoveries suggest that an uneven ring of dust orbiting the star might be the culprit. (Learn more on: <a href='https://www.nasa.gov/feature/jpl/mysterious-dimming-of-tabbys-star-may-be-caused-by-dust'>Mysterious Dimming of Tabby's Star May Be Caused by Dust | NASA</a>)"
+    }else if($(this).attr('id') == "373id"){
+        starTitle[0].textContent = "RR Lyrae";
+        starInfo[0].innerHTML = "RR Lyrae variables are variable stars with similar properties to Cepheids. Although more common than Cepheids, their shorter periods (period 4 hours- 1 day) and lower average luminosity (80L) make them less useful in identifying galaxies far far away. (Learn more on <a href='https://www.astronomy.ohio-state.edu/ryden.1/ast162_4/notes16.html'>Lecture 16: Pulsating Stars (ohio-state.edu)</a>)"
+    }
+
+    $(".learn-more-popup").show();
+});
+
+$(".xicon").click(function(){
+    $(".learn-more-popup").hide();
 })
 
 var curArray = []
@@ -185,8 +213,8 @@ function getJson(name, binary)
                 }
             });
     
-                }
-        );
+        }
+    );
 }
 
 

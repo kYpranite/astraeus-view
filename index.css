@@ -229,3 +229,26 @@ body{
     top: 5vh;
     left: 35%;
 }
+
+.learn-more-popup{
+    padding: 2%;
+    color:white;
+    background-color:#1b1e23;
+    border-radius: 25px;
+    position: absolute;
+    top: 10%;
+    left:35%;
+    height: 35vh;
+    width: 60vh;
+    overflow-wrap: break-word;
+}
+.star-title{
+    display: inline-block;
+}
+.xicon{
+    margin-top: 5px;
+    float:right;
+}
+.xicon:hover{
+    cursor: pointer;
+}
