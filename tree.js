@@ -1,7 +1,7 @@
 var cepheid = false
 var binary = true
 const coolbutton = $(".cool-button");
-var slider = document.getElementById("myRange");
+var slider = $(".slider");
 
 var curArray;
 coolbutton.click(function(){
