@@ -1,7 +1,8 @@
 var cepheid = false
 var binary = true
 var slider = document.getElementById("time-slider");
-
+var sliderMin = document.getElementById("first");
+var sliderMax = document.getElementById("last");
 var kic846 = $("#kic846");
 var kic010 = $("#kic010");
 var kic754 = $("#kic754");
@@ -17,7 +18,6 @@ console.log(container);
 
 kic846.click(function(){
     getJson('KIC 8462852', true)
-    
 })
 kic010.click(function(){
     getJson('KIC 01026957', false)
@@ -46,9 +46,9 @@ slider.oninput = function() {
     {
         orbitRadius = 8
         planet.position.set(
-            Math.cos(rads + Math.PI/2 - Math.PI/18) * orbitRadius - 2.5,
+            Math.cos(rads + Math.PI/2 - Math.PI/15) * orbitRadius - 2.5,
             0,
-            Math.sin(rads + Math.PI/2- Math.PI/18) * orbitRadius,
+            Math.sin(rads + Math.PI/2- Math.PI/15) * orbitRadius,
         );
     }
 }
@@ -208,6 +208,8 @@ function setupEclipseBinary(time, flux)
     var low = time[minIndex]
 
     console.log("binary min max" + minIndex)
+    sliderMin.textContent = time[0].toFixed(3)
+    sliderMax.textContent = time[time.length - 1].toFixed(3)
 
 }
 
@@ -230,6 +232,8 @@ function setupCepheid(time, flux)
     maxIndex2 = flux.indexOf(max2)
     console.log("cepheid min " + time[minIndex] + "|" + time[maxIndex] + "|" + time[maxIndex2])
     curArray = maxArray(flux, 5)
+    sliderMin.textContent = time[0].toFixed(3)
+    sliderMax.textContent = time[time.length - 1].toFixed(3)
 }
 
 function maxArray(array, max)
