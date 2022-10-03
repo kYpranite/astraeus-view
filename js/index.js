@@ -17,23 +17,30 @@ console.log(container);
 
 
 kic846.click(function(){
-    getJson('KIC 8462852', true)
+    getJson('8462852', false)
 })
 kic010.click(function(){
-    getJson('KIC 01026957', false)
+    getJson('01026957', true)
 })
 kic754.click(function(){
-    getJson('KIC 7548061', false)
+    getJson('7548061', false)
 })
 kic014.click(function(){
-    getJson('KIC 01433962', false)
+    getJson('01433962', false)
 })
 kic373.click(function(){
-    getJson('KIC 3733346', false)
+    getJson('3733346', false)
 })
 
 var starTitle = $(".star-title");
 var starInfo = $(".star-info");
+
+$('#kic-form').on("keyup", function(e) {
+    if (e.keyCode == 13) {
+        let searchValue = $('#kic-form')[0].value;
+        getJson(searchValue, false);
+    }
+});
 
 $(".learn-label").click(function(){
     if($(this).attr('id') == "754id"){
@@ -162,57 +169,67 @@ render();
 var time1;
 var flux1
 var myChart
+
 function getJson(name, binary)
 {
+    if (name[0] == "K"){
+        name = name.slice(4)
+    }
     scene.add(star);
-    jsonName = '../assets/sample-stars/' + name + '.json'
-    console.log(jsonName)
-    fetch(jsonName).then((response) => response.json())
-    .then((json) => 
-        {
-            currStarLabel.textContent = json.kic;
-            if(myChart != null)
-            {
-                myChart.destroy();
-            }
-            time1 = json.time
-            flux1 = json.flux
-            if(binary)
-            {
-                setupEclipseBinary(time1, flux1)
-            }
-            else{
-                setupCepheid(time1, flux1)
-            }
-            
-            
-            console.log(combine(time1, flux1))
-            const data = {
-                datasets: [{
-                    label: 'Light Curve',
-                    data: combine(time1, flux1),
-                    backgroundColor: 'rgb(255, 99, 132)'
-                }],
-                };
-            const ctx1 = document.getElementById('graph').getContext('2d');
-            myChart = new Chart(ctx1, {
-                type: 'scatter',
-                data: data,
-                color: "rgba(255,255,255,1)",
-                options: {
-                scales: {
-                    x: {
-                    type: 'linear',
-                    position: 'bottom'
-                    }
-                }
-                }
-            });
-    
-        }
-    );
+    if (name != "7548061" && name != "3733346" && name != "8462852" && name != "01026957"){
+        fetch("https://salty-temple-63100.herokuapp.com/https://secret-chamber-88123.herokuapp.com/getjson" + name).then((response) => response.json())
+        .then((data) => {console.log(data); modelJson(data, binary)});
+    }
+    else{
+        jsonName = '../assets/sample-stars/KIC ' + name + '.json';
+        fetch(jsonName).then((response) => response.json())
+        .then((json) => {
+            modelJson(json, binary);
+        })
+    }
 }
 
+function modelJson(json, binary){
+    currStarLabel.textContent = json.kic;
+    if(myChart != null)
+    {
+        myChart.destroy();
+    }
+    time1 = json.time
+    flux1 = json.flux
+    if(binary)
+    {
+        setupEclipseBinary(time1, flux1)
+    }
+    else{
+        setupCepheid(time1, flux1)
+    }
+    
+    
+    console.log(combine(time1, flux1))
+    const data = {
+        datasets: [{
+            label: 'Light Curve',
+            data: combine(time1, flux1),
+            backgroundColor: 'rgb(255, 99, 132)'
+        }],
+        };
+    const ctx1 = document.getElementById('graph').getContext('2d');
+    myChart = new Chart(ctx1, {
+        type: 'scatter',
+        data: data,
+        color: "rgba(255,255,255,1)",
+        options: {
+        scales: {
+            x: {
+            type: 'linear',
+            position: 'bottom'
+            }
+        }
+        }
+    });
+
+}
 
 function setupEclipseBinary(time, flux)
 {

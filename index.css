@@ -95,7 +95,7 @@ body{
 .form-control{
     background-color:rgba(0,0,0,0) !important;
     border:1px solid white !important;
-    color: white;
+    color: white !important;
 }
 
 .search-icon{
