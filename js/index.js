@@ -9,17 +9,18 @@ var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 
 kic846.click(function(){
-    getJson('KIC 8462852')
+    getJson('KIC 8462852', true)
+    
 })
 kic010.click(function(){
-    getJson('KIC 01026957')
+    getJson('KIC 01026957', false)
     // do shit
 })
 kic754.click(function(){
-    getJson('KIC 7548061')
+    getJson('KIC 7548061', true)
 })
 kic014.click(function(){
-    getJson('KIC 01433962')
+    getJson('KIC 01433962', false)
 })
 kic373.click(function(){
     getJson('KIC 3733346')
@@ -86,7 +87,7 @@ var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshSta
        
     }
 ));
-
+star.position.x = 
 scene.add(star);
 
 var light = new THREE.PointLight(0xFFFFFF, 5, 500)
@@ -127,7 +128,7 @@ render();
 var time1;
 var flux1
 var myChart
-function getJson(name)
+function getJson(name, binary)
 {
     jsonName = '../assets/sample-stars/' + name + '.json'
     console.log(jsonName)
@@ -140,7 +141,14 @@ function getJson(name)
             }
             time1 = json.time
             flux1 = json.flux
-            setupEclipseBinary(time1, flux1)
+            if(binary)
+            {
+                setupEclipseBinary(time1, flux1)
+            }
+            else{
+                setupCepheid(time1, flux1)
+            }
+            
             
             console.log(combine(time1, flux1))
             const data = {
