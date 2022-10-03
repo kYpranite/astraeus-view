@@ -8,6 +8,11 @@ var kic754 = $("#kic754");
 var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 
+const time = $(".current-time");
+const container = document.getElementById( 'canvas' );
+
+console.log(container);
+
 kic846.click(function(){
     getJson('KIC 8462852', true)
     
@@ -26,10 +31,10 @@ kic373.click(function(){
     getJson('KIC 3733346')
 })
 
-
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     rads = this.value * .01 * 2 * Math.PI 
+    time.textContent=this.value;
     if(cepheid)
     {
         light.intensity = curArray[this.value] + 2
@@ -51,7 +56,7 @@ var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(
     75,
-    window.innerWidth/window.innerHeight,
+    container.offsetWidth/container.offsetHeight,
     0.1,
     1000
 )
@@ -59,14 +64,14 @@ camera.position.z = 12;
 
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setClearColor("#000000");
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(container.offsetWidth, container.offsetHeight);
 const textureLoader = new THREE.TextureLoader();
 
-document.body.appendChild(renderer.domElement);
+container.appendChild(renderer.domElement);
 
 window.addEventListener('resize', ()=> {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    camera.aspect = container.offsetWidth / container.offsetHeight
 
     camera.updateProjectionMatrix();
 })
@@ -79,6 +84,7 @@ var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.Mes
     }
 ));
 
+planet.position.x=-5;
 
 const sunBaseColor = textureLoader.load('../maps/2k_sun.jpg');
 var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshStandardMaterial(
@@ -87,7 +93,9 @@ var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshSta
        
     }
 ));
-star.position.x = 
+
+star.position.x = -5;
+
 scene.add(star);
 
 var light = new THREE.PointLight(0xFFFFFF, 5, 500)
