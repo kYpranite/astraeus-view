@@ -133,6 +133,7 @@ fetch('../assets/sample-stars/KIC 8462852.json').then((response) => response.jso
         const myChart = new Chart(ctx1, {
             type: 'scatter',
             data: data,
+            color: "rgba(255,255,255,1)",
             options: {
             scales: {
                 x: {
@@ -143,8 +144,7 @@ fetch('../assets/sample-stars/KIC 8462852.json').then((response) => response.jso
             }
         });
 
-            }
-    );
+    });
 
 function setupEclipseBinary(time, flux)
 {

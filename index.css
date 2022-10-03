@@ -12,6 +12,10 @@ h3{
     font-weight: 700;
 }
 
+h4{
+    font-weight: 700;
+}
+
 
 body{
     overflow: hidden;
@@ -198,11 +202,10 @@ body{
     top:24vh;
     right: 0;
     border-left: 3px solid white;
-    border-bottom: 3px solid white;
     border-top: 3px solid white;
     border-color: white;
     padding: 1%;
-    height: 35vh;
+    height: 46vh;
     width: 35%;
 }
 
