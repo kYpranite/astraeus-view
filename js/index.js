@@ -1,24 +1,15 @@
 var cepheid = false
 var binary = true
-const coolbutton = $(".cool-button");
 var slider = document.getElementById("time-slider");
 
+var kic846 = $("#kic846");
+var kic010 = $("#kic010");
+var kic754 = $("#kic754");
+var kic014 = $("#kic014");
+var kic373 = $("#kic373");
 
-var curArray;
-coolbutton.click(function(){
-    if(cepheid)
-    {
-        setupEclipseBinary(time1, flux1)
-        curArray = flux1
-
-    }
-    else
-    {
-        setupCepheid(time1, flux1)
-        curArray = maxArray(flux1, 4)
-        console.log(curArray)
-    }
-
+kic846.click(function(){
+    // do shit
 })
 
 
@@ -138,7 +129,7 @@ fetch('../assets/sample-stars/KIC 8462852.json').then((response) => response.jso
                 backgroundColor: 'rgb(255, 99, 132)'
             }],
             };
-        const ctx1 = document.getElementById('myChart').getContext('2d');
+        const ctx1 = document.getElementById('graph').getContext('2d');
         const myChart = new Chart(ctx1, {
             type: 'scatter',
             data: data,
