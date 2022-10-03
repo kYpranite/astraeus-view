@@ -9,6 +9,7 @@ var kic754 = $("#kic754");
 var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 
+var currStarLabel = document.querySelector('.current-star');
 var time = $("#current-time");
 console.log(time)
 
@@ -36,7 +37,6 @@ var curArray = []
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     rads = this.value * .01 * 2 * Math.PI 
-    time[0].textContent = this.value;
     if(cepheid)
     {
         console.log(curArray[this.value] + 2)
@@ -146,6 +146,7 @@ function getJson(name, binary)
     fetch(jsonName).then((response) => response.json())
     .then((json) => 
         {
+            currStarLabel.textContent = json.kic;
             if(myChart != null)
             {
                 myChart.destroy();
