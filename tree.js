@@ -1,5 +1,5 @@
 var cepheid = false
-var binary = false
+var binary = true
 const coolbutton = $(".cool-button");
 var slider = document.getElementById("myRange");
 
@@ -7,15 +7,14 @@ var curArray;
 coolbutton.click(function(){
     if(cepheid)
     {
-        var min
-        var max1
-        var max2
         setupEclipseBinary(time1, flux1)
+        curArray = flux1
+
     }
     else
     {
         setupCepheid(time1, flux1)
-        curArray = maxArray(flux1, 5)
+        curArray = maxArray(flux1, 4)
         console.log(curArray)
     }
 
@@ -24,20 +23,19 @@ coolbutton.click(function(){
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
-    rads = this.value * .01 * 2 * Math.PI
-    console.log(curArray[this.value]);
+    rads = this.value * .01 * 2 * Math.PI 
     if(cepheid)
     {
-        light.intensity = curArray[this.value]
+        light.intensity = curArray[this.value] + 2
     }
     else if(binary)
     {
         console.log("test")
         orbitRadius = 8
         planet.position.set(
-            Math.cos(rads) * orbitRadius,
+            Math.cos(rads + Math.PI/2 - Math.PI/18) * orbitRadius,
             0,
-            Math.sin(rads) * orbitRadius
+            Math.sin(rads + Math.PI/2- Math.PI/18) * orbitRadius
         );
     }
 }
@@ -97,6 +95,21 @@ var render = function() {
     planet.rotation.y += 0.01
     renderer.render(scene, camera);
 
+    // if( binary && Date.now() % 100 == 0)
+    // {
+    //    slider.stepUp(1)
+    //    if(slider.value == 100)
+    //    {
+    //         slider.value = 0
+    //    }
+    //    rads = (slider.value / 100)* .01 * 2 * Math.PI 
+    //    orbitRadius = 8
+    //     planet.position.set(
+    //         Math.cos(rads + Math.PI/2) * orbitRadius,
+    //         0,
+    //         Math.sin(rads + Math.PI/2) * orbitRadius
+    //     );
+    // }
     // date = Date.now() * 0.0005;
     // orbitRadius = 6
     // planet.position.set(
@@ -109,15 +122,12 @@ render();
 
 var time1;
 var flux1
-fetch('./assets/sample-stars/KIC 01026957.json').then((response) => response.json())
+fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json())
 .then((json) => 
     {
         
         time1 = json.time
         flux1 = json.flux
-
-        
-        setupCepheid(time1, flux1)
         setupEclipseBinary(time1, flux1)
         
         console.log(combine(time1, flux1))
@@ -150,11 +160,17 @@ function setupEclipseBinary(time, flux)
     binary = true
     cepheid = false
     scene.add(planet);
-    
+    slider.setAttribute("max", 100)
+    slider.setAttribute("min", 0)
+
     var min = Math.min(...flux)
     console.log(min)
     var minIndex = flux.indexOf(min)
-    
+    var min2 = Math.min(...flux.slice(minIndex+400))
+    var min2Index = flux.indexOf(min2)
+    var end = Math.min(2*(min2Index - minIndex) + minIndex, time.length - 1)
+    console.log(end)
+    console.log(time[end])
     var low = time[minIndex]
 
     console.log("binary min max" + minIndex)
@@ -184,14 +200,16 @@ function setupCepheid(time, flux)
 function maxArray(array, max)
 {
     let arrayMax = Math.max(...array)
+    let arrayMin = Math.min(...array)
+
     console.log(arrayMax)
-    let multiple = 5 / arrayMax
+    let multiple = 5 / (arrayMax - arrayMin)
     let result = [];
     console.log(array)
     for(let i = 0; i< array.length; i++)
     {
         // console.log(array[i])
-        result.push(array[i] * multiple);
+        result.push((array[i] - arrayMin ) * multiple);
     }
     return result;
 }
