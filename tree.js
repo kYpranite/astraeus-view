@@ -1,14 +1,45 @@
+var cepheid = false
+var binary = false
 const coolbutton = $(".cool-button");
 var slider = document.getElementById("myRange");
 
+var curArray;
 coolbutton.click(function(){
-    console.log("HI");
+    if(cepheid)
+    {
+        var min
+        var max1
+        var max2
+        setupEclipseBinary(time1, flux1)
+    }
+    else
+    {
+        setupCepheid(time1, flux1)
+        curArray = maxArray(flux1, 5)
+        console.log(curArray)
+    }
+
 })
 
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
-  console.log(this.value);
+    rads = this.value * .01 * 2 * Math.PI
+    console.log(curArray[this.value]);
+    if(cepheid)
+    {
+        light.intensity = curArray[this.value]
+    }
+    else if(binary)
+    {
+        console.log("test")
+        orbitRadius = 8
+        planet.position.set(
+            Math.cos(rads) * orbitRadius,
+            0,
+            Math.sin(rads) * orbitRadius
+        );
+    }
 }
 
 
@@ -20,7 +51,7 @@ var camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 )
-camera.position.z = 10;
+camera.position.z = 12;
 
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setClearColor("#000000");
@@ -44,22 +75,20 @@ var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.Mes
     }
 ));
 planet.position.x = -7
-scene.add(planet);
 
 
 const sunBaseColor = textureLoader.load('./maps/2k_sun.jpg');
 var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshStandardMaterial(
     {
         map: sunBaseColor,
-        emissive: 0x00FFFF,
-        emissiveIntensity: 1
+       
     }
 ));
 
 scene.add(star);
 
-var light = new THREE.PointLight(0xFFFFFF, 4, 500)
-light.position.set(0, 0, 10)
+var light = new THREE.PointLight(0xFFFFFF, 5, 500)
+light.position.set(0, 0, 7)
 scene.add(light)
 
 var render = function() {
@@ -68,29 +97,33 @@ var render = function() {
     planet.rotation.y += 0.01
     renderer.render(scene, camera);
 
-    date = Date.now() * 0.0005;
-    orbitRadius = 6
-    planet.position.set(
-    Math.cos(Math.PI/2) * orbitRadius,
-    0,
-    Math.sin(Math.PI/2) * orbitRadius
-    );
+    // date = Date.now() * 0.0005;
+    // orbitRadius = 6
+    // planet.position.set(
+    //     Math.cos(Math.PI/2) * orbitRadius,
+    //     0,
+    //     Math.sin(Math.PI/2) * orbitRadius
+    // );
 }
 render();
+
 var time1;
 var flux1
-fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json())
+fetch('./assets/sample-stars/KIC 01026957.json').then((response) => response.json())
 .then((json) => 
     {
-        var KIC8462852 = normalize(json.time, json.flux)
+        
         time1 = json.time
         flux1 = json.flux
-        console.log(json)
+
+        
+        setupCepheid(time1, flux1)
+        setupEclipseBinary(time1, flux1)
         
         console.log(combine(time1, flux1))
         const data = {
             datasets: [{
-                label: 'Scatter Dataset',
+                label: 'Light Curve',
                 data: combine(time1, flux1),
                 backgroundColor: 'rgb(255, 99, 132)'
             }],
@@ -112,38 +145,57 @@ fetch('./assets/sample-stars/KIC 8462852.json').then((response) => response.json
             }
     );
 
-function normalize(time, flux)
+function setupEclipseBinary(time, flux)
 {
-    //console.log(indexOfOutlier(flux))
-
-    // let low = time[0]
-    // let multiple = (2 * Math.PI) / (time[time.length - 1] - time[0])
-    // for(let i = 0; i < time.length; i++)
-    // {
-    //     time[i] -= low
-    //     time[i] *= multiple
-    //     console.log(time[i]);
-    // }
-}
-
-function indexOfOutlier(array)
-{
-    console.log(array)
-    var total = 0;
-    array.forEach(element => {
-        
-        total += element
-    })
-    var mean = total / array.length
-    console.log(total / array.length)
+    binary = true
+    cepheid = false
+    scene.add(planet);
     
-    for(var i = 0; i < array.length; i++)
-    {
-        if (array[i] < mean * .9)
-            return i;
-    }
+    var min = Math.min(...flux)
+    console.log(min)
+    var minIndex = flux.indexOf(min)
+    
+    var low = time[minIndex]
+
+    console.log("binary min max" + minIndex)
 
 }
+
+function setupCepheid(time, flux)
+{
+    scene.remove(planet)
+    cepheid = true
+    binary = false
+    
+    slider.setAttribute("max", time.length -1)
+    slider.setAttribute("min", 0)
+
+
+    min = Math.min(...flux)
+    max = Math.max(...flux)
+    max2 = 0
+
+    minIndex = flux.indexOf(min)
+    maxIndex = flux.indexOf(max)
+    maxIndex2 = flux.indexOf(max2)
+    console.log("cepheid min " + time[minIndex] + "|" + time[maxIndex] + "|" + time[maxIndex2])
+}
+
+function maxArray(array, max)
+{
+    let arrayMax = Math.max(...array)
+    console.log(arrayMax)
+    let multiple = 5 / arrayMax
+    let result = [];
+    console.log(array)
+    for(let i = 0; i< array.length; i++)
+    {
+        // console.log(array[i])
+        result.push(array[i] * multiple);
+    }
+    return result;
+}
+
 
 function combine(time, flux)
 {
