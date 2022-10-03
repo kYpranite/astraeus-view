@@ -22,12 +22,12 @@ def genStar(kic, name="", variability=""):
 # stars.append(genStar("KIC 01026957", variability="ECLI"))
 # stars.append(genStar("KIC 01433962", variability="ECLI"))
 
-lyr = genStar("KIC 3733346")
-lyr.lc.plot()
+# lyr = genStar("KIC 3733346")
+# lyr.lc.plot()
 
 # for star in stars:
-with open("KIC 3733346.json", "w+") as outfile:
-    outfile.write(lyr.outputJson())
-    outfile.close()
+#     with open(star.kic + ".json", "w+") as outfile:
+#         outfile.write(star.outputJson())
+#         outfile.close()
 
 plt.show()

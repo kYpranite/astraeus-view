@@ -209,6 +209,16 @@ body{
     width: 35%;
 }
 
+#canvas{
+    position: absolute;
+    height:70vh;
+    width: 100%;
+    z-index: -1;
+    top:0;
+    background-color: #000;
+    border: 1px solid black;
+}
+
 #graph{
     height: 25vh;
     width: 50%;
