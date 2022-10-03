@@ -26,5 +26,5 @@
 .twinkling{
   background:transparent url(../assets/images/twinkling.png) repeat top center;
   z-index:-1;
-  animation:move-twink-back 400s linear infinite;
+  animation:move-twink-back 300s linear infinite;
 }

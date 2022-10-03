@@ -21,32 +21,50 @@
     <div class="wrapper">
         <div class="control">
             <h1 class="title">Astreaus View</h1>
-            <div class="current-view">
-                <h3 class="current-star-label">Currently Viewing:</h2>
-                <h4 class="current-star">KIC 1231234123</h4>
-            </div>
             <div class="selection">
+                <div class="interesting-stars">
+                    <h3 class="samples-header">Interesting Stars</h3>
+                    <button class="btn btn-outline-light sample-star-button btn-lg" type="button" id="kic846">KIC 8462852</button>
+                    <span class="learn-label">Learn More</span>
+                    <!-- <button class="btn btn-outline-light sample-star-button btn-lg" type="button" id="kic014">KIC 01433962</button>
+                    <span class="learn-label">Learn More</span>   -->
+                    <button class="btn btn-outline-light sample-star-button btn-lg" type="button" id="kic010">KIC 01026957</button>
+                    <span class="learn-label">Learn More</span>
+                    <button class="btn btn-outline-light sample-star-button btn-lg" type="button" id="kic754">KIC 7548061</button>
+                    <span class="learn-label">Learn More</span>
+                    <button class="btn btn-outline-light sample-star-button btn-lg" type="button" id="kic014">KIC 01433962</button>
+                    <span class="learn-label">Learn More</span> 
+                </div>
+                <h2 class="searchbar-label">Try your own star: </h2>
+                <div></div>
                 <div class="input-group searchbar">
+                    <label for="kic-form"></label>
                     <div class="input-group-prepend">
                       <span class="input-group-text search-icon" id="basic-addon1">&#xF002;</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Enter KIC Number" aria-label="Enter KIC Number" aria-describedby="basic-addon1">
+                    <input type="text" id="kic-form" class="form-control" placeholder="Enter KIC Number" aria-label="Enter KIC Number" aria-describedby="basic-addon1">
                 </div>
-                <div class="interesting-stars">
-                    <h3 class="samples-header">Interesting Stars</h3>
-                    <button class="btn btn-outline-light sample-star-button" type="button">KIC 8462852</button>
-                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
-                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
-                    <button class="btn btn-outline-light sample-star-button" type="button">Button</button>
-                </div>
-
             </div>
+            
         </div>
         <div class="main-container">
             <div class="display">
-                
+                <div class="viewing-info">
+                    <div class="current-view">
+                        <h3 class="current-star-label">Currently Viewing:</h2>
+                        <h4 class="current-star">KIC 1231234123</h4>
+                    </div>
+                    <div class="current-view">
+                        <h3 class="current-time-label">Current Day:</h2>
+                        <h4 class="current-time">36.5</h4>
+                    </div>
+                </div>
             </div>
-            <div class="time">
+            <div class="slider-control">
+                <h3 class="timeline-label">Timeline (Barycentric Julian Days)</h3>
+                <span class="slider-marker" id="first">1</span>
+                <input type="range" min="1" max="100" value="50" class="slider">
+                <span class="slider-marker" id="last">3000</span>
             </div>
         </div>
     </div>
