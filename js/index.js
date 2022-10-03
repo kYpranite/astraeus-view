@@ -22,21 +22,23 @@ kic010.click(function(){
     // do shit
 })
 kic754.click(function(){
-    getJson('KIC 7548061', true)
+    getJson('KIC 7548061', false)
 })
 kic014.click(function(){
     getJson('KIC 01433962', false)
 })
 kic373.click(function(){
-    getJson('KIC 3733346')
+    getJson('KIC 3733346', false)
 })
 
+var curArray = []
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     rads = this.value * .01 * 2 * Math.PI 
     time.textContent=this.value;
     if(cepheid)
     {
+        console.log(curArray[this.value] + 2)
         light.intensity = curArray[this.value] + 2
     }
     else if(binary)
@@ -44,9 +46,9 @@ slider.oninput = function() {
         console.log("test")
         orbitRadius = 8
         planet.position.set(
-            Math.cos(rads + Math.PI/2 - Math.PI/18) * orbitRadius,
+            Math.cos(rads + Math.PI/2 - Math.PI/18) * orbitRadius - 2.5,
             0,
-            Math.sin(rads + Math.PI/2- Math.PI/18) * orbitRadius
+            Math.sin(rads + Math.PI/2- Math.PI/18) * orbitRadius,
         );
     }
 }
@@ -96,10 +98,10 @@ var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshSta
 
 star.position.x = -5;
 
-scene.add(star);
+
 
 var light = new THREE.PointLight(0xFFFFFF, 5, 500)
-light.position.set(0, 0, 7)
+light.position.set(-5, 0, 7)
 scene.add(light)
 
 var render = function() {
@@ -138,6 +140,7 @@ var flux1
 var myChart
 function getJson(name, binary)
 {
+    scene.add(star);
     jsonName = '../assets/sample-stars/' + name + '.json'
     console.log(jsonName)
     fetch(jsonName).then((response) => response.json())
@@ -226,6 +229,7 @@ function setupCepheid(time, flux)
     maxIndex = flux.indexOf(max)
     maxIndex2 = flux.indexOf(max2)
     console.log("cepheid min " + time[minIndex] + "|" + time[maxIndex] + "|" + time[maxIndex2])
+    curArray = maxArray(flux, 5)
 }
 
 function maxArray(array, max)
