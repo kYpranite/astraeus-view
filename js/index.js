@@ -8,7 +8,9 @@ var kic754 = $("#kic754");
 var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 
-const time = $(".current-time");
+var time = $("#current-time");
+console.log(time)
+
 const container = document.getElementById( 'canvas' );
 
 console.log(container);
@@ -19,7 +21,6 @@ kic846.click(function(){
 })
 kic010.click(function(){
     getJson('KIC 01026957', false)
-    // do shit
 })
 kic754.click(function(){
     getJson('KIC 7548061', true)
@@ -28,20 +29,19 @@ kic014.click(function(){
     getJson('KIC 01433962', false)
 })
 kic373.click(function(){
-    getJson('KIC 3733346')
+    getJson('KIC 3733346', false)
 })
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     rads = this.value * .01 * 2 * Math.PI 
-    time.textContent=this.value;
+    time[0].textContent = this.value;
     if(cepheid)
     {
         light.intensity = curArray[this.value] + 2
     }
     else if(binary)
     {
-        console.log("test")
         orbitRadius = 8
         planet.position.set(
             Math.cos(rads + Math.PI/2 - Math.PI/18) * orbitRadius,
