@@ -9,7 +9,20 @@ var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 
 kic846.click(function(){
+    getJson('KIC 8462852')
+})
+kic010.click(function(){
+    getJson('KIC 01026957')
     // do shit
+})
+kic754.click(function(){
+    getJson('KIC 7548061')
+})
+kic014.click(function(){
+    getJson('KIC 01433962')
+})
+kic373.click(function(){
+    getJson('KIC 3733346')
 })
 
 
@@ -113,38 +126,48 @@ render();
 
 var time1;
 var flux1
-fetch('../assets/sample-stars/KIC 8462852.json').then((response) => response.json())
-.then((json) => 
-    {
-        
-        time1 = json.time
-        flux1 = json.flux
-        setupEclipseBinary(time1, flux1)
-        
-        console.log(combine(time1, flux1))
-        const data = {
-            datasets: [{
-                label: 'Light Curve',
-                data: combine(time1, flux1),
-                backgroundColor: 'rgb(255, 99, 132)'
-            }],
-            };
-        const ctx1 = document.getElementById('graph').getContext('2d');
-        const myChart = new Chart(ctx1, {
-            type: 'scatter',
-            data: data,
-            options: {
-            scales: {
-                x: {
-                type: 'linear',
-                position: 'bottom'
+var myChart
+function getJson(name)
+{
+    jsonName = '../assets/sample-stars/' + name + '.json'
+    console.log(jsonName)
+    fetch(jsonName).then((response) => response.json())
+    .then((json) => 
+        {
+            if(myChart != null)
+            {
+                myChart.destroy();
+            }
+            time1 = json.time
+            flux1 = json.flux
+            setupEclipseBinary(time1, flux1)
+            
+            console.log(combine(time1, flux1))
+            const data = {
+                datasets: [{
+                    label: 'Light Curve',
+                    data: combine(time1, flux1),
+                    backgroundColor: 'rgb(255, 99, 132)'
+                }],
+                };
+            const ctx1 = document.getElementById('graph').getContext('2d');
+            myChart = new Chart(ctx1, {
+                type: 'scatter',
+                data: data,
+                options: {
+                scales: {
+                    x: {
+                    type: 'linear',
+                    position: 'bottom'
+                    }
                 }
-            }
-            }
-        });
+                }
+            });
+    
+                }
+        );
+}
 
-            }
-    );
 
 function setupEclipseBinary(time, flux)
 {
