@@ -16,6 +16,9 @@ const container = document.getElementById( 'canvas' );
 
 console.log(container);
 
+$( window ).on("load", ()=>{
+    getJson('7548061', false);
+})
 
 kic846.click(function(){
     getJson('8462852', false)
@@ -25,9 +28,6 @@ kic010.click(function(){
 })
 kic754.click(function(){
     getJson('7548061', false)
-})
-kic014.click(function(){
-    getJson('01433962', false)
 })
 kic373.click(function(){
     getJson('3733346', false)
