@@ -262,3 +262,58 @@ body{
     display: none;
 
 }
+
+
+ /* @media only screen and (max-width: 600px) {...}
+
+@media only screen and (min-width: 600px) {...} */
+
+@media only screen and (min-width: 768px) {    
+    .title{
+        font-size: 2em;
+        margin-bottom: 25%;
+    }
+    .sample-star-button{
+        width: 90%;
+    }
+    .control{
+        width: 30%;
+    }
+    .searchbar-label{
+        font-size: 1.5em;
+    }
+    .slider-control{
+        left: 30%;
+        width: 70%;
+    }
+    .main-container{
+        left:30%;
+        width:70%;
+    }
+} 
+
+@media only screen and (min-width: 992px) {
+
+    .title{
+        font-size: 2em;
+        margin-bottom: 25%;
+    }
+    .sample-star-button{
+        width: 90%;
+    }
+    .control{
+        width: 25%;
+    }
+    .searchbar-label{
+        font-size: 1.5em;
+    }
+    .slider-control{
+        left: 25%;
+        width: 75%;
+    }
+    .main-container{
+        left:25%;
+        width:75%;
+    }
+
+}
