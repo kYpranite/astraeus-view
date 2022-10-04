@@ -36,13 +36,13 @@ kic373.click(function(){
 var starTitle = $(".star-title");
 var starInfo = $(".star-info");
 
-$('#kic-form').on("keyup", function(e) {
-    if (e.keyCode == 13) {
-        $('.alert').hide();
-        let searchValue = $('#kic-form')[0].value;
-        getJson(searchValue, false);
-    }
-});
+// $('#kic-form').on("keyup", function(e) {
+//     if (e.keyCode == 13) {
+//         $('.alert').hide();
+//         let searchValue = $('#kic-form')[0].value;
+//         getJson(searchValue, false);
+//     }
+// });
 
 $(".learn-label").click(function(){
     if($(this).attr('id') == "754id"){
