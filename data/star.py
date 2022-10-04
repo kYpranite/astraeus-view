@@ -8,6 +8,7 @@ class Star:
         self.time = time
         self.flux = flux
         self.lc = lc
+        self.error = ""
 
         if variability != "":
             self.variability = variability

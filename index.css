@@ -253,3 +253,12 @@ body{
 .xicon:hover{
     cursor: pointer;
 }
+
+.error-msg{
+    width: 80%;
+    overflow-wrap: break-word;
+    margin: auto;
+    margin-top: 25%;
+    display: none;
+
+}

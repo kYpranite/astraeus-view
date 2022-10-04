@@ -20,7 +20,7 @@ def genStar(kic, name="", variability=""):
 # stars.append(genStar("KIC 8462852", "Boyajian's Star"))
 # stars.append(genStar("KIC 7548061", "V1154 Cyg", "CEPH"))
 # stars.append(genStar("KIC 01026957", variability="ECLI"))
-# stars.append(genStar("KIC 01433962", variability="ECLI"))
+# stars.append(genStar("KIC 3733346"))
 
 # lyr = genStar("KIC 3733346")
 # lyr.lc.plot()

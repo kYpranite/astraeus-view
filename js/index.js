@@ -10,7 +10,8 @@ var kic014 = $("#kic014");
 var kic373 = $("#kic373");
 var currStarLabel = document.querySelector('.current-star');
 var time = $("#current-time");
-
+var error = $(".error-msg");
+new bootstrap.Alert(error[0]);
 const container = document.getElementById( 'canvas' );
 
 console.log(container);
@@ -37,6 +38,7 @@ var starInfo = $(".star-info");
 
 $('#kic-form').on("keyup", function(e) {
     if (e.keyCode == 13) {
+        $('.alert').hide();
         let searchValue = $('#kic-form')[0].value;
         getJson(searchValue, false);
     }
@@ -178,7 +180,16 @@ function getJson(name, binary)
     scene.add(star);
     if (name != "7548061" && name != "3733346" && name != "8462852" && name != "01026957"){
         fetch("https://salty-temple-63100.herokuapp.com/https://secret-chamber-88123.herokuapp.com/getjson" + name).then((response) => response.json())
-        .then((data) => {console.log(data); modelJson(data, binary)});
+        .then((data) => {
+            console.log(data.error)
+            if (data.error == "invalidStar"){
+                $('.alert').show()
+                $('.alert')[0].textContent = "Error! Invalid KIC. Please try another star or verify your star again."
+                return;       
+            }
+            
+            modelJson(data, binary)
+        });
     }
     else{
         jsonName = '../assets/sample-stars/KIC ' + name + '.json';
