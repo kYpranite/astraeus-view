@@ -59,8 +59,12 @@ body{
     font-family: FontAwesome;
 }
 
+.current-star-label{
+    font-size: 2em;
+}
+
 .current-star{
-    font-size: 1.7em;
+    font-size: 2em;
 }
 
 .searchbar{
@@ -192,6 +196,10 @@ body{
     position: absolute;
     right: 0;
     border-left: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: auto;
     border-color: white;
     height: 24vh;
     width: 25%;
@@ -296,7 +304,7 @@ body{
 
     .title{
         font-size: 2.5em;
-        margin-bottom: 25%;
+        margin-bottom: 10%;
     }
     .sample-star-button{
         width: 90%;
