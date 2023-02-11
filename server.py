@@ -1,4 +1,6 @@
 import simplejson
+import os
+
 from flask import Flask, render_template, url_for
 from data import scraper
 
@@ -20,7 +22,7 @@ def returnJson(kic):
         return simplejson.dumps({"error": "invalidStar"})
 
 
-port = 5000
+port = int(os.environ.get('PORT', 5000))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=False)
