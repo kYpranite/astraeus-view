@@ -1,4 +1,4 @@
-import json
+import simplejson
 
 
 class Star:
@@ -40,6 +40,8 @@ class Star:
             "time": outputTime,
             "flux": outputFlux,
             "name": self.name,
-            "variability": self.variability
+            "variability": self.variability,
+            "error:": self.error
         }
-        return json.dumps(output)
+
+        return simplejson.dumps(output, ignore_nan=True)

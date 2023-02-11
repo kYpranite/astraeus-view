@@ -1,6 +1,5 @@
 from lightkurve import search_targetpixelfile
-import matplotlib.pyplot as plt
-import star
+from data import star
 
 stars = []
 # KIC 7548061  (V1154 Cyg) -Ceph
@@ -20,7 +19,7 @@ def genStar(kic, name="", variability=""):
 # stars.append(genStar("KIC 8462852", "Boyajian's Star"))
 # stars.append(genStar("KIC 7548061", "V1154 Cyg", "CEPH"))
 # stars.append(genStar("KIC 01026957", variability="ECLI"))
-# stars.append(genStar("KIC 3733346"))
+# stars.append(genStar("KIC 01433962", variability="ECLI"))
 
 # lyr = genStar("KIC 3733346")
 # lyr.lc.plot()
@@ -29,5 +28,3 @@ def genStar(kic, name="", variability=""):
 #     with open(star.kic + ".json", "w+") as outfile:
 #         outfile.write(star.outputJson())
 #         outfile.close()
-
-plt.show()

@@ -19,12 +19,12 @@
   background-repeat: repeat;
   background-position: center;
   background-color: black;
-  background-image: url(../assets/images/stars.png);
+  background-image: url(/static/assets/images/stars.png);
   z-index:-2;
 }
 
 .twinkling{
-  background:transparent url(../assets/images/twinkling.png) repeat top center;
+  background:transparent url(/static/assets/images/twinkling.png) repeat top center;
   z-index:-1;
   animation:move-twink-back 300s linear infinite;
 }

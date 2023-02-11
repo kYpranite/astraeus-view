@@ -111,7 +111,7 @@ window.addEventListener('resize', ()=> {
     camera.updateProjectionMatrix();
 })
 
-const marsBaseColor = textureLoader.load("../maps/2k_mars.jpg");
+const marsBaseColor = textureLoader.load("/static/assets/maps/2k_mars.jpg");
 
 var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.MeshStandardMaterial(
     {
@@ -121,7 +121,7 @@ var planet = new THREE.Mesh(new THREE.SphereGeometry(0.2, 50, 50), new THREE.Mes
 
 planet.position.x=-5;
 
-const sunBaseColor = textureLoader.load('../maps/2k_sun.jpg');
+const sunBaseColor = textureLoader.load('/static/assets/maps/2k_sun.jpg');
 var star = new THREE.Mesh(new THREE.SphereGeometry(3, 50, 50), new THREE.MeshStandardMaterial(
     {
         map: sunBaseColor,
@@ -179,7 +179,7 @@ function getJson(name, binary)
     }
     scene.add(star);
     if (name != "7548061" && name != "3733346" && name != "8462852" && name != "01026957"){
-        fetch("https://salty-temple-63100.herokuapp.com/https://secret-chamber-88123.herokuapp.com/getjson" + name).then((response) => response.json())
+        fetch("/getjson" + name).then((response) => response.json())
         .then((data) => {
             console.log(data.error)
             if (data.error == "invalidStar"){
@@ -192,7 +192,7 @@ function getJson(name, binary)
         });
     }
     else{
-        jsonName = '../assets/sample-stars/KIC ' + name + '.json';
+        jsonName = '/static/assets/sample-stars/KIC ' + name + '.json';
         fetch(jsonName).then((response) => response.json())
         .then((json) => {
             modelJson(json, binary);
